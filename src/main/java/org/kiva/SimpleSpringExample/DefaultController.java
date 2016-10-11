@@ -10,21 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DefaultController {
 
 	@GetMapping("/")
-    public String view() {
+	public String view() {
 		return "view";
-    }
-	
+	}
+
 	@PostMapping("/parseNum")
-    public String parseNum(@RequestParam(value="number", required=false) String number, Model model) {
-		String resp = null;
-		try {
-			int rem = Integer.parseInt(number) % 5;
-			resp = rem < 2 ? "F" : "O";
-			
-		} catch(Exception e) {
-			resp = "B";
-		}
-		model.addAttribute("parsedNum", resp);
+	public String parseNum(@RequestParam(value = "number", required = false) String number, Model model) {
+		int rem = Integer.parseInt(number) % 5;
+		model.addAttribute("parsedNum", rem < 2 ? "F" : "O");
 		return "numResp";
-    }
+	}
 }
